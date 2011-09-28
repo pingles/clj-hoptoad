@@ -64,8 +64,8 @@
                               {:body notice :content-type :xml :accept :xml})
         body-xml (-> response :body parse-xml)
         text-at (fn [key] (first (zf/xml-> body-xml key zf/text)))]
-    {:id (Integer. (text-at :id))
-     :error-id (Integer. (text-at :error-id))
+    {:id (Long/parseLong (text-at :id))
+     :error-id (Long/parseLong (text-at :error-id))
      :url (text-at :url)}))
 
 (defn notify [& args]
